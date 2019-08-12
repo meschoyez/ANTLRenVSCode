@@ -7,6 +7,26 @@
 \usepackage[T1]{fontenc}
 \usepackage[]{times}
 \usepackage[colorlinks=true]{hyperref}
+\usepackage{graphicx}
+\usepackage{listingsutf8}
+\usepackage{xcolor}
+
+\addtolength{\voffset}{-2cm}
+\addtolength{\textheight}{4cm}
+
+\renewcommand{\lstlistingname}{Código}
+
+% Código fuente tipo consola (shell)
+\lstdefinestyle{consola}{
+  backgroundcolor=\color{black},
+  belowcaptionskip=1\baselineskip,
+  frame=,
+  xleftmargin=\parindent,
+  language=bash,
+  basicstyle=\footnotesize\ttfamily\color{white},
+  commentstyle=\itshape\color{purple!40!black},
+}
+
 
 \author{Maximiliano A. Eschoyez}
 \title{ANTLR en Visual Studio Code}
@@ -20,23 +40,67 @@
 	Esta guía tiene como fin el uso de ANTLR en la IDE Visual Studio Code. Se explica desde la instalación hasta la generación de los diferentes gráficos.
 \end{abstract}
 
-\section{Instalación del \emph{plug--in}}
+\section{\emph{plug--in} a Utilizar}
+\label{intro}
 
 En la \href{https://www.antlr.org/tools.html}{página web de ANTLR} se pueden encontrar los \emph{plug--in} para diferentes IDEs.
 
-Si bien para Visual Studio Code existen más herramientas para ANTLR, vamos a utilizar el \emph{plug--in} de Mike Lischke \href{https://marketplace.visualstudio.com/items?itemName=mike-lischke.vscode-antlr4}{ANTLR4 grammar syntax support}.
+\begin{figure}[b]
+	\centering
+	\includegraphics[width=3.5cm]{IconoANTLRvscode}
+	\caption{ANTLR4 grammar syntax support -- Mike Lischke}
+	\label{icono}
+\end{figure}
+
+Si bien para Visual Studio Code existen más herramientas para ANTLR, vamos a utilizar el \emph{plug--in} de Mike Lischke \href{https://marketplace.visualstudio.com/items?itemName=mike-lischke.vscode-antlr4}{ANTLR4 grammar syntax support}~(Figura~\ref{icono}).
+
+
+\section{Instalación del \emph{plug--in}}
+\label{instalacion}
 
 La instalación se puede realizar de dos formas:
 \begin{enumerate}
 	\item con el atajo de teclado \verb|Ctl+Shift+x| o \emph{clickeando} el ícono \emph{Extensions} y buscándolo, o
     \item con el atajo de teclado \verb|Ctl+p| para ejecutar en el \emph{VS Code Quick Open} el comando
     \begin{verbatim}
-	      ext install mike-lischke.vscode-antlr4
+		ext install mike-lischke.vscode-antlr4
 	\end{verbatim}.
 \end{enumerate}
 
 
-\section{Cosas que puedo hacer}
+\section{¿Cómo vamos a trabajar?}
+
+Vamos trabajar dentro de un proyecto Java de tipo Maven, por lo tanto, es necesario instalar soporte Java, particularmente el \emph{plug--in \textbf{Maven for Java}} (\verb|vscjava.vscode-maven|).
+
+Los archivos de ANTLR llevan extensión \verb|*.g| o \verb|*.g4|, pero utilizaremos la segunda opción.
+
+\begin{figure}[p]
+	\centering
+	\includegraphics[width=.9\textwidth]{SelectJSON}
+	\caption{Acceso a la configuración}
+	\label{preferences}
+\end{figure}
+
+Para simplificar la generación del software, vamos a colocar todos los archivos en el mismo paquete de Java.  Para esto, debemos modificar el archivo \verb|settings.json|.  Se puede acceder de varias formas, pero la más simple es siguiendo estos pasos:
+\begin{enumerate}
+	\item Abrir el \emph{Command Palette} con \verb|Ctl+Shift+P|,
+	\item Buscar la opción \emph{Preferences: Open Settings (JSON)} y seleccionarla (Figura~\ref{preferences}),
+	\item Agregar las siguientes líneas de código
+	\begin{lstlisting}[style=consola]
+	"antlr4.generation.mode": "external",
+	"antlr4.generation.visitors": true
+	\end{lstlisting}
+\end{enumerate}
+Hay que tener en cuenta que la coma es el separador en JSON y no debe faltar.  Además, las líneas de código deben estar antes de la llave de cierre como en el ejemplo del Código~\ref{settings}.
+
+\lstinputlisting[float,style=consola,caption={Ejemplo de archivo \texttt{settings.json}.},label=settings]{settings.json}
+
+
+\section{¿Dónde encuentro más información?}
+\label{pagina}
+
+El \emph{plug--in} completo se encuentra publicado con acceso libre en GitHub.  Este documento se basa en la documentación del \href{https://github.com/mike-lischke/vscode-antlr4/tree/master/doc}{\emph{plug--in ANTLR}}.
+
 
 
 
