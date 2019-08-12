@@ -8,7 +8,7 @@
 \usepackage[]{times}
 \usepackage[colorlinks=true]{hyperref}
 \usepackage{graphicx}
-usepackage{subcaption}
+%\usepackage{subcaption}
 \usepackage{listingsutf8}
 \usepackage{xcolor}
 
@@ -70,8 +70,12 @@ La instalación se puede realizar de dos formas:
 		ext install mike-lischke.vscode-antlr4
 	\end{verbatim}
 \end{enumerate}
-Elijan la que más les guste. 
 
+\begin{center}
+	\fbox{
+		\parbox{.9\textwidth}{\textbf{NOTA}: Debe tenerse en cuenta que es necesario tener instalada la biblioteca ANTLR en el sistema o incluir el \texttt{.jar} en el proyecto. Sin alguna de esta alternativas, el \emph{plug--in} hará todo lo necesario pero no podremos generar código ejecutable.}
+	}	
+\end{center}
 
 
 \section{¿Cómo vamos a trabajar?}
@@ -80,7 +84,7 @@ Vamos trabajar dentro de un proyecto Java de tipo Maven, por lo tanto, es necesa
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=.85\textwidth]{SelectJSON}
+	\includegraphics[width=.95\textwidth]{SelectJSON}
 	\caption{Acceso a la configuración (archivo \texttt{settings.json}).}
 	\label{preferences}
 \end{figure}
@@ -105,37 +109,44 @@ Hay que tener en cuenta que la coma es el separador en JSON y no debe faltar.  A
 
 Ya instalados y configurados los \emph{plug--ins} necesarios, podemos comenzar el primer proyecto.
 
+\subsection{Crear Proyecto Java Maven}
+\label{proyecto_maven}
+
 \begin{figure}[t]
 	\centering
-	\begin{subfigure}[b]{.95\textwidth}
-		\centering
-		\includegraphics[width=.85\textwidth]{NuevoProyecto}
-		\caption{Nuevo proyecto Java.}
-		\label{maven_nuevo}
-	\end{subfigure}
-	\begin{subfigure}[b]{.95\textwidth}
-		\centering
-		\includegraphics[width=.85\textwidth]{NombreProyecto}
-		\caption{Nombre proyecto Java}
-		\label{maven_nombre}
-	\end{subfigure}
-	\caption{Creación de un Proyecto Maven.}
-	\label{maven}
+	\includegraphics[width=.95\textwidth]{NuevoProyecto}
+	\caption{Nuevo proyecto Java.}
+	\label{maven_nuevo}
+\end{figure}
+
+
+El primer paso es crear un proyecto Java.  Para esto, se puede acceder al \emph{Command Palette} con el atajo \verb|Ctl+Shift+P|, escribir la palabra \emph{project} y elegir la opción ``\emph{Java: Create Java Project}'' (Fig.~\ref{maven_nuevo}). Luego, elegir la carpeta destino y darle nombre al proyecto.  Al finalizar estos pasos, tendremos un proyecto Java con un paquete por defecto denominado \verb|App|.  El archivo \verb|app.java| contiente el método \verb|main()| y está listo para compilar y ejecutar.
+
+
+\begin{figure}[t]
+	\centering
+	\includegraphics[width=.95\textwidth]{PrimerCompilacion}
+	\caption{Elegir Java para compilar.}
+	\label{java_project}
 \end{figure}
 
 \begin{figure}[t]
 	\centering
-	\caption{Creación de un Proyecto Maven.}
-	\label{maven_nombre}
+	\includegraphics[width=.95\textwidth]{PrimeraEjecucion}
+	\caption{Nombrar proyecto Java.}
+	\label{hello_java}
 \end{figure}
 
-El primer paso es crear un proyecto Java.  Para esto, se puede acceder al \emph{Command Palette} con el atajo \verb|Ctl+Shift+P|, escribir la palabra \emph{project} y elegir la opción ``\emph{Java: Create Java Project}'' (Fig.~\ref{maven}). Luego, elegir la carpeta destino y darle nombre al proyecto (Fig.~\ref{maven}).
+
+Recordemos que Visual Studio Code está pensado para desarrollar software, por lo tanto, cuando querramos ejecutar nuestro software vamos a hacerlo sobre el \emph{debugger}.  La ejecución se realiza presionando \verb|F5|.  La primera ejecución del proyecto necesita que se configuren parámetros de compilación qué, para nuestro caso, será suficiente con las configuraciones por defecto.  Al presionar \verb|F5| por primera vez debemos elegir ``Java'' como tipo de proyecto  (Fig.~\ref{java_project}).  Esta acción crea y abre el archivo de configuración \verb|launch.json| en la carpeta \verb|.vscode| del proyecto.  Si presionamos nuevamente \verb|F5| se ejecutará el proyecto y veremos que se abre el panel del \emph{debugger} y se muestra la salida por consola con el texto ``\emph{Hello Java}'' (Fig.~\ref{hello_java}).  Las próximas veces se ejecutará nuestro programa sin necesidad de realizar configuraciones adicionales.
 
 
+\subsection{Archivo ANTLR}
+\label{archivo_antlr}
 
-Los archivos de ANTLR llevan extensión \verb|*.g| o \verb|*.g4|, pero utilizaremos la segunda opción.
+Con el proyecto Java creado y listo para trabajar vamos a crear el archivo para ANTLR. Los archivos de ANTLR llevan extensión \verb|.g| o \verb|.g4|, pero utilizaremos la segunda opción.  El atajo de teclado para crear un archivo vacío es \verb|Ctl+n|, que para hacer efectivo el coloreo hay que guardarlo (\verb|Ctl+s|) con la extensión apropiada.
 
-
+ANTLR permite la generación del \emph{lexer} y del \emph{parser}.  Por lo tanto, los archivos \verb|.g4| pueden ser para el primero, el segundo o ambos combinados.  Nosotros utilizaremos archivos combinados dentro del paquete que contiene el método \verb|main()| para facilitar la ejecución y visualización de resultados.  En particular, en el proyecto ejemplo guardaremos el archivo \verb|.g4| en la carpeta \verb|src/app/|.
 
 
 \end{document}
