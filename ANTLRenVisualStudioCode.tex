@@ -15,29 +15,8 @@
 \addtolength{\voffset}{-2cm}
 \addtolength{\textheight}{4cm}
 
-\renewcommand{\lstlistingname}{Código}
-
-% Código fuente tipo consola (shell)
-\lstdefinestyle{consola}{
-  backgroundcolor=\color{black},
-  belowcaptionskip=1\baselineskip,
-  frame=,
-  xleftmargin=\parindent,
-  language=bash,
-  basicstyle=\footnotesize\ttfamily\color{white},
-  commentstyle=\itshape\color{purple!40!black},
-}
-
-\lstdefinestyle{editor}{
-  backgroundcolor=\color{black!5},
-  belowcaptionskip=1\baselineskip,
-  frame=single,
-  numbers=left,
-  xleftmargin=\parindent,
-  language=bash,
-  basicstyle=\footnotesize\ttfamily\color{black},
-  commentstyle=\itshape\color{purple!40!black},
-}
+% Se incluyen formatos redifinidos para paquete listings
+\input{Lenguajes.tex}
 
 
 \author{Maximiliano A. Eschoyez}
@@ -84,7 +63,7 @@ La instalación se puede realizar de dos formas:
 
 \begin{center}
 	\fbox{
-		\parbox{.9\textwidth}{\textbf{NOTA}: La biblioteca ANTLR \emph{runtime} debe estar en el sistema o incluir el \texttt{.jar} en el proyecto para ejecutar el programa.}
+		\parbox{.9\textwidth}{\textbf{NOTA}: La biblioteca ANTLR \emph{complete} debe estar en el sistema o incluir el \texttt{.jar} en el proyecto para ejecutar el programa.}
 	}	
 \end{center}
 
@@ -105,23 +84,24 @@ Para simplificar la generación del software, vamos a colocar todos los archivos
 	\item Abrir el \emph{Command Palette} con \verb|Ctl+Shift+P|,
 	\item Buscar la opción \emph{Preferences: Open Settings (JSON)} y seleccionarla (Figura~\ref{preferences}),
 	\item Agregar las siguientes líneas de código
-	\begin{lstlisting}[style=consola]
+	\begin{lstlisting}[style=miJSON]
 	"antlr4.generation.mode": "external",
 	"antlr4.generation.visitors": true
 	\end{lstlisting}
 \end{enumerate}
 Hay que tener en cuenta que la coma es el separador en JSON y no debe faltar.  Además, las líneas de código deben estar antes de la llave de cierre como en el ejemplo del Código~\ref{settings}.
 
-\lstinputlisting[float,style=consola,caption={Ejemplo de archivo \texttt{settings.json}.},label=settings]{settings.json}
+\lstinputlisting[float,style=miJSON,caption={Ejemplo de archivo \texttt{settings.json}.},label=settings]{settings.json}
 
 Si no incluimos el \verb|.jar| de ANTLR en el proyecto, debemos configurar el proyecto para que se pueda utilizar la biblioteca del sistema.  En el archivo \verb|.classpath| debemos agregar la línea
-\begin{lstlisting}[style=consola]
+\begin{lstlisting}[style=miXML]
 <classpathentry kind="lib"
-    path="/usr/share/java/antlr4-runtime.jar" />	
+    path="/usr/share/java/antlr-4.x.x-complete.jar" />	
 \end{lstlisting}
-donde \verb|"/usr/share/java/antlr4-runtime.jar"| es para Debian~9 y deben reemplazarla por lo que corresponda.  El archivo de ejemplo completo puede verse en el Código~\ref{classpath}.
+donde \verb|"/usr/share/java/antlr-4.x.x-complete..jar"| es para Debian~9 y deben reemplazarla por lo que corresponda.  El archivo de ejemplo completo puede verse en el Código~\ref{classpath}.
 
-\lstinputlisting[float,style=consola,caption={Ejemplo de archivo \texttt{.classpath}.},label=classpath]{classpath}
+\lstinputlisting[float,style=miXML,caption={Ejemplo de archivo \texttt{.classpath}.},label=classpath]{classpath}
+
 
 \section{Primer Proyecto}
 \label{primerproyecto}
@@ -159,6 +139,8 @@ El primer paso es crear un proyecto Java.  Para esto, se puede acceder al \emph{
 
 Recordemos que Visual Studio Code está pensado para desarrollar software, por lo tanto, cuando querramos ejecutar nuestro software vamos a hacerlo sobre el \emph{debugger}.  La ejecución se realiza presionando \verb|F5|.  La primera ejecución del proyecto necesita que se configuren parámetros de compilación qué, para nuestro caso, será suficiente con las configuraciones por defecto.  Al presionar \verb|F5| por primera vez debemos elegir ``Java'' como tipo de proyecto  (Fig.~\ref{java_project}).  Esta acción crea y abre el archivo de configuración \verb|launch.json| en la carpeta \verb|.vscode| del proyecto.  Si presionamos nuevamente \verb|F5| se ejecutará el proyecto y veremos que se abre el panel del \emph{debugger} y se muestra la salida por la \emph{debug console} con el texto ``\emph{Hello Java}'' (Fig.~\ref{hello_java}).  Las próximas veces se ejecutará nuestro programa sin necesidad de realizar configuraciones adicionales.
 
+Finalmente, es necesario modificar el archivo \verb|launch.json| para habilitar 
+
 
 \subsection{Archivo ANTLR}
 \label{archivo_antlr}
@@ -171,7 +153,8 @@ ANTLR permite la generación del \emph{lexer} y del \emph{parser}.  Por lo tanto
 \subsection{Ejemplo Archivo ANTLR}
 \label{ejemplo_archivo_antlr}
 
-\lstinputlisting[float,style=editor,caption={Ejemplo de archivo \texttt{.g4}.},label=id_g4]{id.g4}
+% ,style=editor
+\lstinputlisting[float,style=miANTLR,caption={Ejemplo de archivo \texttt{.g4}.},label=id_g4]{id.g4}
 
 A modo de ejemplo, el Código~\ref{id_g4} es un archivo \verb|.g4| que realiza la búsqueda de identificadores tipo Java (nombres de variable o de método).  Tanto las reglas léxicas como las gramaticales comienzan con el identificador o etiqueta y terminan en punto y como (\verb|;|).  Los dos puntos (\verb|:|) indican el comienzo de la regla y la barra vertical o \emph{pipe} (\verb-|-) separan las distintas reglas alternativas.  Las expresiones regulares para la detección de \emph{tokens} se etiquetan con nombres en mayúsculas, como ser \verb|ID| en la línea~10.  Las reglas gramaticales se etiquetan con nombres en minúsculas, como ser \verb|s|.
 
