@@ -1,0 +1,12 @@
+{
+    "name": "Debug ANTLR4 grammar",
+    "type": "antlr-debug",
+    "request": "launch",
+    // Archivo a parsear
+    "input": "src/App/codigo.c",
+    // Simbolo inicial
+    "startRule": "programa",
+    // Muestra Arbol Sintactico
+    "printParseTree": true,
+    "visualParseTree": true
+}

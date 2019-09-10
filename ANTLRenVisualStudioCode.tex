@@ -108,8 +108,8 @@ donde \verb|"/usr/share/java/antlr-4.x.x-complete..jar"| es para Debian~9 y debe
 
 Ya instalados y configurados los \emph{plug--ins} necesarios, podemos comenzar el primer proyecto.
 
-\subsection{Crear Proyecto Java Maven}
-\label{proyecto_maven}
+\subsection{Crear Proyecto Java}
+\label{proyecto_java}
 
 \begin{figure}[t]
 	\centering
@@ -139,7 +139,26 @@ El primer paso es crear un proyecto Java.  Para esto, se puede acceder al \emph{
 
 Recordemos que Visual Studio Code está pensado para desarrollar software, por lo tanto, cuando querramos ejecutar nuestro software vamos a hacerlo sobre el \emph{debugger}.  La ejecución se realiza presionando \verb|F5|.  La primera ejecución del proyecto necesita que se configuren parámetros de compilación qué, para nuestro caso, será suficiente con las configuraciones por defecto.  Al presionar \verb|F5| por primera vez debemos elegir ``Java'' como tipo de proyecto  (Fig.~\ref{java_project}).  Esta acción crea y abre el archivo de configuración \verb|launch.json| en la carpeta \verb|.vscode| del proyecto.  Si presionamos nuevamente \verb|F5| se ejecutará el proyecto y veremos que se abre el panel del \emph{debugger} y se muestra la salida por la \emph{debug console} con el texto ``\emph{Hello Java}'' (Fig.~\ref{hello_java}).  Las próximas veces se ejecutará nuestro programa sin necesidad de realizar configuraciones adicionales.
 
-Finalmente, es necesario modificar el archivo \verb|launch.json| para habilitar 
+Finalmente, es necesario modificar el archivo \verb|launch.json| para habilitar la visualización del árbol sintáctico (para más información ver la guía del \emph{plug--in} ANTLR \href{https://github.com/mike-lischke/vscode-antlr4/blob/master/doc/grammar-debugging.md}{\emph{Debugging ANTLR4 grammars}}).  Se debe agregar a la lista de opciones la entrada del Código~\ref{launch_json_antlr}.
+
+\lstinputlisting[float,style=miJSON,caption={Entrada en archivo \texttt{settings.json} para ANTLR.},label=launch_json_antlr]{launchJsonAntlr.json}
+
+Para el correcto funcionamiento de ANTLR en nuestro proyecto es necesario ajustar del Código~\ref{launch_json_antlr} las entradas:
+\begin{description}
+	\item[\texttt{input}] el archivo de entrada a \emph{parsear},
+	\item[\texttt{startRule}] el símbolo inicial,
+	\item[\texttt{grammar}] (opcional) el archivo ANTLR con las reglas gramaticales,
+	\item[\texttt{actionFile}] (opcional) ver documentación.
+\end{description}
+
+\subsection{Crear Proyecto Java con Maven}
+\label{proyecto_maven}
+
+
+
+\href{https://maven.apache.org/}{sitio web de Maven}
+
+\href{https://maven.apache.org/guides/getting-started/maven-in-five-minutes.html}{guía rápida sobre Maven}
 
 
 \subsection{Archivo ANTLR}
@@ -166,5 +185,6 @@ Las palabras reservadas del Código~\ref{id_g4} significan lo siguiente:
 \end{description}
 
 Cada vez que se grabe el archivo en disco, el \emph{plug--in} de ANTLR regenerará todos los archivos.
+
 
 \end{document}
