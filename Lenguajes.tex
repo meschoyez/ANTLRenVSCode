@@ -15,11 +15,11 @@
 \lstdefinestyle{miXML}{
     language=XML,
     morekeywords={classpath,classpathentry},
-    basicstyle=\footnotesize\ttfamily\color{Cyan!20},
+    basicstyle=\footnotesize\ttfamily\color{white},
     identifierstyle=\footnotesize\ttfamily\color{SkyBlue},
-    commentstyle=\itshape\color{purple!40!black},
+    commentstyle=\itshape\color{green!80},
     stringstyle=\color{Apricot},
-    keywordstyle=\color{cyan!80},
+    keywordstyle=\color{cyan!90},
     breaklines=true,
     backgroundcolor=\color{black},
     belowcaptionskip=1\baselineskip,
@@ -28,20 +28,21 @@
     xleftmargin=\parindent
 }
 
-% Código fuente tipo consola (json)
+% Código fuente tipo consola (json mejor)
+% \lstdefinelanguage{json}{
 \lstdefinestyle{miJSON}{
-    language=Java,
-    basicstyle=\footnotesize\ttfamily\color{white},
-    identifierstyle=\footnotesize\ttfamily\color{SkyBlue},
-    commentstyle=\itshape\color{green!80},
-    stringstyle=\color{Apricot},
-    keywordstyle=\color{cyan!80},
-    breaklines=true,
-    backgroundcolor=\color{black},
-    belowcaptionskip=1\baselineskip,
-    rulecolor=\color{black},
-    frame=trbl,
-    xleftmargin=\parindent
+  string=[b][\color{Apricot}]",
+  comment=[l][\itshape\color{green!80}]//,
+  morecomment=[s][\color{SkyBlue}]{:}{,},
+  morekeywords={true,false},
+  basicstyle=\footnotesize\ttfamily\color{white},
+  keywordstyle=\footnotesize\ttfamily\bfseries\color{purple!60},
+  backgroundcolor=\color{black},
+  breaklines=true,
+  belowcaptionskip=1\baselineskip,
+  rulecolor=\color{black},
+  frame=trbl,
+  xleftmargin=\parindent
 }
 
 % Código fuente ANTLR
@@ -53,7 +54,8 @@
     stringstyle=\color{red},
     keywordstyle=\bfseries\color{blue},
     keywords={grammar,\@header,fragment},
-    moredelim=[s][\ttfamily\itshape\footnotesize]{\{}{\}},
+    morecomment=[s][\color{red!80!yellow}]{[}{]},
+    moredelim=*[s][\ttfamily\itshape\footnotesize]{\{}{\}},
     breaklines=true,
     backgroundcolor=\color{black!5},
     belowcaptionskip=1\baselineskip,
