@@ -7,4 +7,5 @@
 *.snm
 *.vrb
 *.toc
-
+*.fdb_latexmk
+*.fls
