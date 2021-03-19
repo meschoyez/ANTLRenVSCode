@@ -6,7 +6,7 @@
 \usepackage[spanish]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[]{times}
-\usepackage[colorlinks=true]{hyperref}
+\usepackage[linkcolor=black,colorlinks=true]{hyperref}
 \usepackage{graphicx}
 %\usepackage{subcaption}
 \usepackage{listingsutf8}
@@ -27,6 +27,8 @@
 %\ebook
 \maketitle
 
+%\tableofcontents
+
 \begin{abstract}
 	Esta guía tiene como fin explicar la utilización de ANTLR en la IDE Visual Studio Code.  Se explican los pasos mínimos desde la instalación de ANTLR Java hasta compilación de código fuente y la generación de diferentes gráficos de análisis.
 \end{abstract}
@@ -38,7 +40,7 @@ En la \href{https://www.antlr.org/tools.html}{página web de ANTLR} se pueden en
 
 \begin{figure}[b]
 	\centering
-	\includegraphics[width=3cm]{IconoANTLRvscode}
+	\includegraphics[width=3cm]{img/IconoANTLRvscode}
 	\caption{ANTLR4 grammar syntax support -- Mike Lischke}
 	\label{icono}
 \end{figure}
@@ -74,7 +76,7 @@ Vamos trabajar dentro de un proyecto Java de tipo Maven, por lo tanto, es necesa
 
 \begin{figure}[p]
 	\centering
-	\includegraphics[width=.95\textwidth]{SelectJSON}
+	\includegraphics[width=.95\textwidth]{img/SelectJSON}
 	\caption{Acceso a la configuración (archivo \texttt{settings.json}).}
 	\label{preferences}
 \end{figure}
@@ -91,7 +93,7 @@ Para simplificar la generación del software, vamos a colocar todos los archivos
 \end{enumerate}
 Hay que tener en cuenta que la coma es el separador en JSON y no debe faltar.  Además, las líneas de código deben estar antes de la llave de cierre como en el ejemplo del Código~\ref{settings}.
 
-\lstinputlisting[float,style=miJSON,caption={Ejemplo de archivo \texttt{settings.json}.},label=settings]{settings.json}
+\lstinputlisting[float,style=miJSON,caption={Ejemplo de archivo \texttt{code/settings.json}.},label=settings]{code/settings.json}
 
 Si no incluimos el \verb|.jar| de ANTLR en el proyecto, debemos configurar el proyecto para que se pueda utilizar la biblioteca del sistema.  En el archivo \verb|.classpath| debemos agregar la línea
 \begin{lstlisting}[style=miXML]
@@ -100,7 +102,7 @@ Si no incluimos el \verb|.jar| de ANTLR en el proyecto, debemos configurar el pr
 \end{lstlisting}
 donde \verb|"/usr/share/java/antlr-4.x.x-complete..jar"| es para Debian~9 y deben reemplazarla por lo que corresponda.  El archivo de ejemplo completo puede verse en el Código~\ref{classpath}.
 
-\lstinputlisting[float,style=miXML,caption={Ejemplo de archivo \texttt{.classpath}.},label=classpath]{classpath}
+\lstinputlisting[float,style=miXML,caption={Ejemplo de archivo \texttt{.classpath}.},label=classpath]{code/classpath}
 
 
 \section{Primer Proyecto}
@@ -113,7 +115,7 @@ Ya instalados y configurados los \emph{plug--ins} necesarios, podemos comenzar e
 
 \begin{figure}[t]
 	\centering
-	\includegraphics[width=.95\textwidth]{NuevoProyecto}
+	\includegraphics[width=.95\textwidth]{img/NuevoProyecto}
 	\caption{Nuevo proyecto Java.}
 	\label{maven_nuevo}
 \end{figure}
@@ -124,14 +126,14 @@ El primer paso es crear un proyecto Java.  Para esto, se puede acceder al \emph{
 
 \begin{figure}[t]
 	\centering
-	\includegraphics[width=.95\textwidth]{PrimerCompilacion}
+	\includegraphics[width=.95\textwidth]{img/PrimerCompilacion}
 	\caption{Elegir Java para compilar.}
 	\label{java_project}
 \end{figure}
 
 \begin{figure}[t]
 	\centering
-	\includegraphics[width=.95\textwidth]{PrimeraEjecucion}
+	\includegraphics[width=.95\textwidth]{img/PrimeraEjecucion}
 	\caption{Ejecutar el proyecto Java.}
 	\label{hello_java}
 \end{figure}
@@ -141,7 +143,7 @@ Recordemos que Visual Studio Code está pensado para desarrollar software, por l
 
 Finalmente, es necesario modificar el archivo \verb|launch.json| para habilitar la visualización del árbol sintáctico (para más información ver la guía del \emph{plug--in} ANTLR \href{https://github.com/mike-lischke/vscode-antlr4/blob/master/doc/grammar-debugging.md}{\emph{Debugging ANTLR4 grammars}}).  Se debe agregar a la lista de opciones la entrada del Código~\ref{launch_json_antlr}.
 
-\lstinputlisting[float,style=miJSON,caption={Entrada en archivo \texttt{settings.json} para ANTLR.},label=launch_json_antlr]{launchJsonAntlr.json}
+\lstinputlisting[float,style=miJSON,caption={Entrada en archivo \texttt{settings.json} para ANTLR.},label=launch_json_antlr]{code/launchJsonAntlr.json}
 
 Para el correcto funcionamiento de ANTLR en nuestro proyecto es necesario ajustar del Código~\ref{launch_json_antlr} las entradas:
 \begin{description}
@@ -173,7 +175,7 @@ ANTLR permite la generación del \emph{lexer} y del \emph{parser}.  Por lo tanto
 \label{ejemplo_archivo_antlr}
 
 % ,style=editor
-\lstinputlisting[float,style=miANTLR,caption={Ejemplo de archivo \texttt{.g4}.},label=id_g4]{id.g4}
+\lstinputlisting[float,style=miANTLR,caption={Ejemplo de archivo \texttt{.g4}.},label=id_g4]{code/id.g4}
 
 A modo de ejemplo, el Código~\ref{id_g4} es un archivo \verb|.g4| que realiza la búsqueda de identificadores tipo Java (nombres de variable o de método).  Tanto las reglas léxicas como las gramaticales comienzan con el identificador o etiqueta y terminan en punto y como (\verb|;|).  Los dos puntos (\verb|:|) indican el comienzo de la regla y la barra vertical o \emph{pipe} (\verb-|-) separan las distintas reglas alternativas.  Las expresiones regulares para la detección de \emph{tokens} se etiquetan con nombres en mayúsculas, como ser \verb|ID| en la línea~10.  Las reglas gramaticales se etiquetan con nombres en minúsculas, como ser \verb|s|.
 
