@@ -6,7 +6,7 @@
 \usepackage[spanish]{babel}
 \usepackage[T1]{fontenc}
 \usepackage[]{times}
-\usepackage[linkcolor=black,colorlinks=true]{hyperref}
+\usepackage[linkcolor=blue,urlcolor=blue,colorlinks=true]{hyperref}
 \usepackage{graphicx}
 %\usepackage{subcaption}
 \usepackage{listingsutf8}
@@ -21,7 +21,7 @@
 
 \author{Maximiliano A. Eschoyez}
 \title{ANTLR en Visual Studio Code}
-\date{2019}
+\date{2021}
 
 \begin{document}
 %\ebook
@@ -30,11 +30,31 @@
 %\tableofcontents
 
 \begin{abstract}
-	Esta guía tiene como fin explicar la utilización de ANTLR en la IDE Visual Studio Code.  Se explican los pasos mínimos desde la instalación de ANTLR Java hasta compilación de código fuente y la generación de diferentes gráficos de análisis.
+	Esta guía tiene como fin explicar la utilización de ANTLR en la IDE Visual Studio Code y con Maven como gestor de proyecto.  Se explican los pasos mínimos desde la instalación de ANTLR Java hasta la compilación de código fuente y la generación de diferentes gráficos de análisis.
 \end{abstract}
 
-\section{\emph{plug--in} ANTLR}
+\section{Preparando la IDE}
 \label{intro}
+
+Lo primero que debemos hacer es instalar la IDE \href{https://code.visualstudio.com/}{Visual Studio Code} en en nuestro sistema según corresponda. Luego, debemos instalar los \emph{plug--in} necesarios para trabajar:
+\begin{enumerate}
+	\item \hyperref[pluginJava]{Java}
+	\item \hyperref[pluginMaven]{Maven}
+	\item \hyperref[pluginANTLR]{ANTLR}
+\end{enumerate}
+
+\subsection{Java \emph{plug--in}}
+\label{pluginJava}
+
+\href{https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack}{Java Extension Pack}
+
+\subsection{Maven \emph{plug--in}}
+\label{pluginMaven}
+
+\href{https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack}{Java Extension Pack}
+
+\subsection{ANTLR \emph{plug--in}}
+\label{pluginANTLR}
 
 En la \href{https://www.antlr.org/tools.html}{página web de ANTLR} se pueden encontrar los \emph{plug--in} para diferentes IDEs.
 
@@ -45,7 +65,7 @@ En la \href{https://www.antlr.org/tools.html}{página web de ANTLR} se pueden en
 	\label{icono}
 \end{figure}
 
-Si bien para Visual Studio Code existen más herramientas para ANTLR, vamos a utilizar el \emph{plug--in} de Mike Lischke \href{https://marketplace.visualstudio.com/items?itemName=mike-lischke.vscode-antlr4}{ANTLR4 grammar syntax support}~(Figura~\ref{icono}).
+Si bien en Visual Studio Code existen varias herramientas para ANTLR, vamos a utilizar el \emph{plug--in} de Mike Lischke \href{https://marketplace.visualstudio.com/items?itemName=mike-lischke.vscode-antlr4}{ANTLR4 grammar syntax support}~(Figura~\ref{icono}).
 
 El \emph{plug--in} completo se encuentra publicado con acceso libre en GitHub.  Este documento se basa en la documentación del \href{https://github.com/mike-lischke/vscode-antlr4/tree/master/doc}{\emph{plug--in ANTLR}}.
 
@@ -63,11 +83,11 @@ La instalación se puede realizar de dos formas:
 	\end{verbatim}
 \end{enumerate}
 
-\begin{center}
-	\fbox{
-		\parbox{.9\textwidth}{\textbf{NOTA}: La biblioteca ANTLR \emph{complete} debe estar en el sistema o incluir el \texttt{.jar} en el proyecto para ejecutar el programa.}
-	}	
-\end{center}
+% \begin{center}
+% 	\fbox{
+% 		\parbox{.9\textwidth}{\textbf{NOTA}: La biblioteca ANTLR \emph{complete} debe estar en el sistema o incluir el \texttt{.jar} en el proyecto para ejecutar el programa.}
+% 	}	
+% \end{center}
 
 
 \section{¿Cómo vamos a trabajar?}
