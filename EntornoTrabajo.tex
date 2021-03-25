@@ -1,0 +1,82 @@
+\section{Preparando el Entorno de Trabajo}
+\label{intro}
+
+Para desarrollar los contenidos de la asignatura, vamos a trabajar con ANTLR y Java en la IDE Visual Studio Code.  Los proyectos de software los gestionaremos con Maven y usaremos Git para versionado y repositorio.
+
+A continuación se explica brevemente como instalar las diferentes herramientas.  No hace falta instalar Git ya que las funcionalidades necesarias se encuentran disponibles en Visual Studio Code.
+
+\subsection{Java}
+\label{Java}
+
+Como herramienta base, vamos a necesitar el \emph{Java Developer Kit (JDK)} versión 11. Pueden descargarlo desde la página de \href{https://www.oracle.com/java/technologies/javase-downloads.html}{Oracle} o utilizar \href{https://openjdk.java.net/}{OpenJDK}, que normalmente se instala con el gestor de paquetes del sistema operativo.
+
+
+\subsection{Visual Studio Code}
+\label{vscode}
+
+Como herramienta de desarrollo vamos a utilizar la IDE \href{https://code.visualstudio.com/}{Visual Studio Code}.  Para distribuciones Lixux, es conveniente utilizar el gestor de paquetes apropiado (Ej. \href{https://wiki.debian.org/VisualStudioCode}{para Debian}).  Luego, debemos instalar los \emph{plug--in} necesarios para trabajar:
+\begin{enumerate}
+	\item \hyperref[pluginJava]{Java}
+	\item \hyperref[pluginMaven]{Maven}
+	\item \hyperref[pluginANTLR]{ANTLR}
+\end{enumerate}
+
+\subsection{Java \emph{plug--in}}
+\label{pluginJava}
+
+El \emph{plug--in} \href{https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack}{Java Extension Pack} instala todo lo necesario para trabajar con el lenguaje Java.
+
+\subsection*{Instalación del \emph{plug--in}}
+\label{instalacionJava}
+
+La instalación se puede realizar de dos formas:
+\begin{enumerate}
+	\item con el atajo de teclado \verb|Ctl+Shift+X| o \emph{clickeando} el ícono \emph{Extensions} y buscándolo, o
+    \item con el atajo de teclado \verb|Ctl+P| para ejecutar en el \emph{VS Code Quick Open} el comando
+    \begin{verbatim}
+		ext install vscjava.vscode-java-pack
+	\end{verbatim}
+\end{enumerate}
+
+
+\subsection{Maven \emph{plug--in}}
+\label{pluginMaven}
+
+El \emph{plug--in} \href{https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven}{Maven for Java} debería instalarse automáticamente al instalar el Java Extension Pack.  Si por algún motivo no se instaló, hacerlo manualmente.
+
+
+\subsection{ANTLR \emph{plug--in}}
+\label{pluginANTLR}
+
+En la \href{https://www.antlr.org/tools.html}{página web de ANTLR} se pueden encontrar los \emph{plug--in} para diferentes IDEs.
+
+\begin{figure}[b]
+	\centering
+	\includegraphics[width=3cm]{img/IconoANTLRvscode}
+	\caption{ANTLR4 grammar syntax support -- Mike Lischke}
+	\label{icono}
+\end{figure}
+
+Si bien en Visual Studio Code existen varias herramientas para ANTLR, vamos a utilizar el \emph{plug--in} de Mike Lischke \href{https://marketplace.visualstudio.com/items?itemName=mike-lischke.vscode-antlr4}{ANTLR4 grammar syntax support}~(Figura~\ref{icono}).
+
+El \emph{plug--in} completo se encuentra publicado con acceso libre en GitHub.  Este documento se basa en la documentación del \href{https://github.com/mike-lischke/vscode-antlr4/tree/master/doc}{\emph{plug--in ANTLR}}.
+
+
+\subsection*{Instalación del \emph{plug--in}}
+\label{instalacionANTLR}
+
+La instalación se puede realizar de dos formas:
+\begin{enumerate}
+	\item con el atajo de teclado \verb|Ctl+Shift+X| o \emph{clickeando} el ícono \emph{Extensions} y buscándolo, o
+    \item con el atajo de teclado \verb|Ctl+P| para ejecutar en el \emph{VS Code Quick Open} el comando
+    \begin{verbatim}
+		ext install mike-lischke.vscode-antlr4
+	\end{verbatim}
+\end{enumerate}
+
+% \begin{center}
+% 	\fbox{
+% 		\parbox{.9\textwidth}{\textbf{NOTA}: La biblioteca ANTLR \emph{complete} debe estar en el sistema o incluir el \texttt{.jar} en el proyecto para ejecutar el programa.}
+% 	}	
+% \end{center}
+
