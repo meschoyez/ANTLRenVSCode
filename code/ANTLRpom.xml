@@ -2,8 +2,10 @@
     ...
 
     <dependency>
+    <!-- Utilizar version ANTLR que genera el codigo fuente -->
         <groupId>org.antlr</groupId>
         <artifactId>antlr4</artifactId>
+        <!-- ultima version Agosto 2021 -->
         <version>4.9.2</version>
     </dependency>
 <dependencies>
