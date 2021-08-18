@@ -1,25 +1,64 @@
 \section{Preparando el Entorno de Trabajo}
 \label{intro}
 
-Para desarrollar los contenidos de la asignatura, vamos a trabajar con ANTLR y Java en la IDE Visual Studio Code.  Los proyectos de software los gestionaremos con Maven y usaremos Git para versionado y repositorio.
+Para desarrollar los contenidos de la asignatura, vamos a trabajar con ANTLR y
+\ifx\python\undefined
+Python
+\else
+Java
+\fi
+en la IDE Visual Studio Code.  Los proyectos de software los gestionaremos con Maven y usaremos Git para versionado y GitHub como repositorio.
 
 A continuación se explica brevemente como instalar las diferentes herramientas.  No hace falta instalar Git ya que las funcionalidades necesarias se encuentran disponibles en Visual Studio Code.
+
+\ifx\python\undefined
+\subsection{Python}
+\label{python}
+
+Vamos a utilizar Python~3 para programar y Anaconda como gestor de paquetes.  Los primero que debemos realizar es instalarlo\dots
+\fi
+
 
 \subsection{Java}
 \label{Java}
 
 Como herramienta base, vamos a necesitar el \emph{Java Developer Kit (JDK)} versión~11. Pueden descargarlo desde la página de \href{https://www.oracle.com/java/technologies/javase-downloads.html}{Oracle} o utilizar \href{https://openjdk.java.net/}{OpenJDK}, que normalmente se instala con el gestor de paquetes del sistema operativo.
-
+\ifx\python\undefined
+Necesitamos Java para poder ejecutar el \emph{plug--in} de ANTLR.
+\fi
 
 \subsection{Visual Studio Code}
 \label{vscode}
 
 Como herramienta de desarrollo vamos a utilizar la IDE \href{https://code.visualstudio.com/}{Visual Studio Code}.  Para distribuciones Lixux, es conveniente utilizar el gestor de paquetes apropiado (Ej. \href{https://wiki.debian.org/VisualStudioCode}{para Debian}).  Luego, debemos instalar los \emph{plug--in} necesarios para trabajar:
 \begin{enumerate}
+	\ifx\python\undefined
+	\item \hyperref[pluginPython]{Pyhon}
+	\fi
 	\item \hyperref[pluginJava]{Java}
 	\item \hyperref[pluginMaven]{Maven}
 	\item \hyperref[pluginANTLR]{ANTLR}
 \end{enumerate}
+
+
+\ifx\python\undefined
+\subsection{Python \emph{plug--in}}
+\label{pluginPython}
+
+El \emph{plug--in} \href{https://marketplace.visualstudio.com/items?itemName=ms-python.python}{Python} instala lo necesario para desarrollar y ejecutar Python.
+
+\subsection*{Instalación del \emph{plug--in}}
+\label{instalacionPython}
+
+La instalación se puede realizar de dos formas:
+\begin{enumerate}
+	\item con el atajo de teclado \verb|Ctl+Shift+X| o \emph{clickeando} el ícono \emph{Extensions} y buscándolo, o
+    \item con el atajo de teclado \verb|Ctl+P| para ejecutar en el \emph{VS Code Quick Open} el comando
+    \begin{verbatim}
+		ext install ms-python.python
+	\end{verbatim}
+\end{enumerate}
+\fi
 
 \subsection{Java \emph{plug--in}}
 \label{pluginJava}
@@ -34,7 +73,7 @@ La instalación se puede realizar de dos formas:
 	\item con el atajo de teclado \verb|Ctl+Shift+X| o \emph{clickeando} el ícono \emph{Extensions} y buscándolo, o
     \item con el atajo de teclado \verb|Ctl+P| para ejecutar en el \emph{VS Code Quick Open} el comando
     \begin{verbatim}
-		ext install vscjava.vscode-java-pack
+		ext install vscjava.vscode-java-pack1
 	\end{verbatim}
 \end{enumerate}
 
@@ -73,10 +112,4 @@ La instalación se puede realizar de dos formas:
 		ext install mike-lischke.vscode-antlr4
 	\end{verbatim}
 \end{enumerate}
-
-% \begin{center}
-% 	\fbox{
-% 		\parbox{.9\textwidth}{\textbf{NOTA}: La biblioteca ANTLR \emph{complete} debe estar en el sistema o incluir el \texttt{.jar} en el proyecto para ejecutar el programa.}
-% 	}	
-% \end{center}
 
