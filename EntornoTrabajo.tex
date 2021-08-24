@@ -1,21 +1,28 @@
 \section{Preparando el Entorno de Trabajo}
 \label{intro}
 
-Para desarrollar los contenidos de la asignatura, vamos a trabajar con ANTLR y
+Para desarrollar los contenidos de la asignatura, vamos a trabajar con ANTLR
 \ifx\python\undefined
-Python
-\else
-Java
+, Python
 \fi
-en la IDE Visual Studio Code.  Los proyectos de software los gestionaremos con Maven y usaremos Git para versionado y GitHub como repositorio.
+y Java en la IDE Visual Studio Code.  Los proyectos de software los gestionaremos con Maven y usaremos Git para versionado y GitHub como repositorio.
 
-A continuación se explica brevemente como instalar las diferentes herramientas.  No hace falta instalar Git ya que las funcionalidades necesarias se encuentran disponibles en Visual Studio Code.
+A continuación se explica brevemente como instalar las diferentes herramientas para Debian Linux.  Las configuraciones se probaron en Debian versiones 9, 10 y 11.
+
+\textbf{Recomendación}: La instalación de paquetes se debe realizar con el \emph{superusario} o \verb|root|, ya sea haciendo \emph{login}, cambiando de usuario con \verb|su -| o utilizando \verb|sudo|. Sin embargo, por seguridad, es recomendable que la descarga manual de paquetes se realice con un usuario normal.
+% En los comandos de consola, al \emph{superusario} lo denotaremos con comenzando las instrucciones con el símbolo \verb|#| y al usario normal con \verb|$|.
 
 \ifx\python\undefined
 \subsection{Python}
 \label{python}
 
-Vamos a utilizar Python~3 para programar y Anaconda como gestor de paquetes.  Los primero que debemos realizar es instalarlo\dots
+% VER --> PyPI y Anaconda como gestores de paquetes.  
+
+Vamos a utilizar Python~3 para programar, que normalmente se encuentra instalado. Entonces. lo primero que debemos realizar es verificar la instalación mediante \verb|apt| como superusario:
+\begin{lstlisting}[style=consola]
+  apt install python3
+\end{lstlisting}
+En caso de necesitar instalarlo, aceptamos y esperamos que termine la ejecución.
 \fi
 
 
@@ -26,11 +33,27 @@ Como herramienta base, vamos a necesitar el \emph{Java Developer Kit (JDK)} vers
 \ifx\python\undefined
 Necesitamos Java para poder ejecutar el \emph{plug--in} de ANTLR.
 \fi
+Realizamos la instalación mediante \verb|apt| como superusario:
+\begin{lstlisting}[style=consola]
+  apt install openjdk-11-jdk
+\end{lstlisting}
+Aceptamos y esperamos que termine la ejecución.
+
+\subsection{Git}
+\label{git}
+
+Para gestionar el versionado y evolución del proyecto, vamos a utilizar la herramenta \href{https://git-scm.com/}{Git}.  Como repositorio en la nube el servicio de \href{https://github.com/}{GitHub}.
+Realizamos la instalación mediante \verb|apt| como superusario:
+\begin{lstlisting}[style=consola]
+  apt install git
+\end{lstlisting}
+Aceptamos y esperamos que termine la ejecución.
+
 
 \subsection{Visual Studio Code}
 \label{vscode}
 
-Como herramienta de desarrollo vamos a utilizar la IDE \href{https://code.visualstudio.com/}{Visual Studio Code}.  Para distribuciones Lixux, es conveniente utilizar el gestor de paquetes apropiado (Ej. \href{https://wiki.debian.org/VisualStudioCode}{para Debian}).  Luego, debemos instalar los \emph{plug--in} necesarios para trabajar:
+Como herramienta de desarrollo vamos a utilizar la IDE \href{https://code.visualstudio.com/}{Visual Studio Code}.  Para distribuciones Linux, es conveniente utilizar el gestor de paquetes apropiado (Ej. \href{https://wiki.debian.org/VisualStudioCode}{para Debian}). Luego, debemos instalar los \emph{plug--in} necesarios para trabajar:
 \begin{enumerate}
 	\ifx\python\undefined
 	\item \hyperref[pluginPython]{Pyhon}
@@ -40,15 +63,26 @@ Como herramienta de desarrollo vamos a utilizar la IDE \href{https://code.visual
 	\item \hyperref[pluginANTLR]{ANTLR}
 \end{enumerate}
 
+\subsubsection{Instalación}
+\label{vscodeInst}
+
+En la página de Visual Studio Code se encuentran disponibles los instaladores para las plataformas soportadas.  El paquete Debian para arquitectura linux64 se puede descargar con el navegador (\href{https://code.visualstudio.com/docs/?dv=linux64_deb}{descargar}) o utilizando \verb|wget|.
+Realizamos la descarga con \verb|wget| como usuario normal y la instalación mediante \verb|dpkg| como superusario:
+\begin{lstlisting}[style=consola]
+ wget https://code.visualstudio.com/sha/
+            download\?build=stable\&os=linux-deb-x64
+ dpkg -i code_XX_amd64.deb 
+\end{lstlisting}
+Aceptamos y esperamos que termine la ejecución.  \verb|XX| es el número de versión y \emph{snapshot}.  El comando \verb|wget| se muestra en dos líneas por limitación del texto, pero debe escribirse en un único renglón.
+
+La instalación del paquete se realiza con \verb|dpkg| porque no está en los respositorios Debian.  Durante la instalación, se genera la entrada necesaria para que las actualizaciones se realicen directamente con \verb|apt|.
+
 
 \ifx\python\undefined
-\subsection{Python \emph{plug--in}}
+\subsubsection{Python \emph{plug--in}}
 \label{pluginPython}
 
 El \emph{plug--in} \href{https://marketplace.visualstudio.com/items?itemName=ms-python.python}{Python} instala lo necesario para desarrollar y ejecutar Python.
-
-\subsection*{Instalación del \emph{plug--in}}
-\label{instalacionPython}
 
 La instalación se puede realizar de dos formas:
 \begin{enumerate}
@@ -60,13 +94,10 @@ La instalación se puede realizar de dos formas:
 \end{enumerate}
 \fi
 
-\subsection{Java \emph{plug--in}}
+\subsubsection{Java \emph{plug--in}}
 \label{pluginJava}
 
 El \emph{plug--in} \href{https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-java-pack}{Java Extension Pack} instala todo lo necesario para trabajar con el lenguaje Java.
-
-\subsection*{Instalación del \emph{plug--in}}
-\label{instalacionJava}
 
 La instalación se puede realizar de dos formas:
 \begin{enumerate}
@@ -78,18 +109,18 @@ La instalación se puede realizar de dos formas:
 \end{enumerate}
 
 
-\subsection{Maven \emph{plug--in}}
+\subsubsection{Maven \emph{plug--in}}
 \label{pluginMaven}
 
 El \emph{plug--in} \href{https://marketplace.visualstudio.com/items?itemName=vscjava.vscode-maven}{Maven for Java} debería instalarse automáticamente al instalar el Java Extension Pack.  Si por algún motivo no se instaló, hacerlo manualmente.
 
 
-\subsection{ANTLR \emph{plug--in}}
+\subsubsection{ANTLR \emph{plug--in}}
 \label{pluginANTLR}
 
 En la \href{https://www.antlr.org/tools.html}{página web de ANTLR} se pueden encontrar los \emph{plug--in} para diferentes IDEs.
 
-\begin{figure}[b]
+\begin{figure}[t]
 	\centering
 	\includegraphics[width=3cm]{img/IconoANTLRvscode}
 	\caption{ANTLR4 grammar syntax support -- Mike Lischke}
@@ -100,9 +131,6 @@ Si bien en Visual Studio Code existen varias herramientas para ANTLR, vamos a ut
 
 El \emph{plug--in} completo se encuentra publicado con acceso libre en GitHub.  Este documento se basa en la documentación del \href{https://github.com/mike-lischke/vscode-antlr4/tree/master/doc}{\emph{plug--in ANTLR}}.
 
-
-\subsection*{Instalación del \emph{plug--in}}
-\label{instalacionANTLR}
 
 La instalación se puede realizar de dos formas:
 \begin{enumerate}
